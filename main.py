@@ -9,6 +9,7 @@ from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer, QMediaPlaylist
 from PyQt5.QtCore import QDir, Qt, QUrl, QEvent
 
 
+from style import style
 
 class VideoWidget(QMainWindow):
     def __init__(self, parent=None):
@@ -94,7 +95,9 @@ class VideoWidget(QMainWindow):
  
     def openFile(self):
         fileName, _ = QFileDialog.getOpenFileName(self, "Open Movie",
-                QDir.homePath())
+                QDir.homePath() + "/Videos", "Media (*.webm *.mp4 *.ts *.avi *.mpeg *.mpg *.mkv *.VOB *.m4v *.3gp *.mp3 *.m4a *.m4a *.wav *.ogg *.flac *.m3u *.m3u8)")
+        
+        
 
         if fileName != '':
             self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile(fileName)))
