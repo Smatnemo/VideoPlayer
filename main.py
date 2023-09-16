@@ -1,9 +1,9 @@
 import sys
 
 from PyQt5 import QtGui, QtCore
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QWidget, QLabel, QVBoxLayout, QHBoxLayout, QFormLayout,
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QWidget, QLabel, QVBoxLayout, QHBoxLayout, QFormLayout, QShortcut,
                             QFileDialog, QHBoxLayout, QSizePolicy, QSlider, QStyle, QAction, QLineEdit, QGridLayout, QMessageBox)
-from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtGui import QPixmap, QIcon, QKeySequence
 from PyQt5.QtMultimediaWidgets import QVideoWidget
 from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer, QMediaPlaylist
 from PyQt5.QtCore import QDir, Qt, QUrl, QEvent
@@ -75,7 +75,6 @@ class VideoWidget(QMainWindow):
         self.controlLayout.addWidget(self.forward)
         self.controlLayout.addWidget(self.positionSlider)
         
-
         self.centralWidget = QWidget()
 
         self.layout = QVBoxLayout()
@@ -87,6 +86,25 @@ class VideoWidget(QMainWindow):
         self.centralWidget.setLayout(self.layout)
         self.setCentralWidget(self.centralWidget)
 
+        # Shortcuts for volume and seeking
+        self.shortcut = QShortcut(QKeySequence(Qt.Key_Up), self)
+        self.shortcut.activated.connect(self.volumeUp)
+
+        self.shortcut = QShortcut(QKeySequence(Qt.Key_Down), self)
+        self.shortcut.activated.connect(self.volumeDown)
+
+        self.shortcut = QShortcut(QKeySequence(Qt.Key_Right), self)
+        self.shortcut.activated.connect(self.forwardSlider)
+
+        self.shortcut = QShortcut(QKeySequence(Qt.Key_Left), self)
+        self.shortcut.activated.connect(self.backSlider)
+
+        self.shortcut = QShortcut(QKeySequence(Qt.ShiftModifier + Qt.Key_Right), self)
+        self.shortcut.activated.connect(self.forwardSlider10)
+
+        self.shortcut = QShortcut(QKeySequence(Qt.ShiftModifier + Qt.Key_Left), self)
+        self.shortcut.activated.connect(self.backSlider10)
+
         self.mediaPlayer.setVideoOutput(self.video_widget)
         self.mediaPlayer.stateChanged.connect(self.mediaStateChanged)
         self.mediaPlayer.positionChanged.connect(self.positionChanged)
@@ -97,15 +115,12 @@ class VideoWidget(QMainWindow):
         fileName, _ = QFileDialog.getOpenFileName(self, "Open Movie",
                 QDir.homePath() + "/Videos", "Media (*.webm *.mp4 *.ts *.avi *.mpeg *.mpg *.mkv *.VOB *.m4v *.3gp *.mp3 *.m4a *.m4a *.wav *.ogg *.flac *.m3u *.m3u8)")
         
-        
-
         if fileName != '':
             self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile(fileName)))
             self.playButton.setEnabled(True)
             self.stopButton.setEnabled(True)
             self.forward.setEnabled(True)
             self.backward.setEnabled(True)
-
 
     def play(self):
         if self.mediaPlayer.state() == QMediaPlayer.PlayingState:
@@ -114,7 +129,6 @@ class VideoWidget(QMainWindow):
             self.mediaPlayer.play()
         else:
             self.mediaPlayer.play()
-
 
     def exitCall(self):
         sys.exit(app.exec_())
@@ -147,8 +161,25 @@ class VideoWidget(QMainWindow):
     def stopMedia(self):
         self.mediaPlayer.stop()
 
-    def volume(self):
-        pass
+    def volumeUp(self):
+        self.mediaPlayer.setVolume(self.mediaPlayer.volume() + 10)
+        print("Volume: " + str(self.mediaPlayer.volume()))
+
+    def volumeDown(self):
+        self.mediaPlayer.setVolume(self.mediaPlayer.volume() - 10)
+        print("Volume: " + str(self.mediaPlayer.volume()))
+
+    def forwardSlider(self):
+        self.mediaPlayer.setPosition(self.mediaPlayer.position() + 1000*60)
+
+    def forwardSlider10(self):
+        self.mediaPlayer.setPosition(self.mediaPlayer.position() + 10000*60)
+
+    def backSlider(self):
+        self.mediaPlayer.setPosition(self.mediaPlayer.position() - 1000*60)
+
+    def backSlider10(self):
+        self.mediaPlayer.setPosition(self.mediaPlayer.position() - 10000*60)
 
 
 if __name__ == '__main__':
