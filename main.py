@@ -46,47 +46,47 @@ class VideoWidget(QMainWindow):
         self.errorLabel = QLabel()
         self.errorLabel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
 
-        # Create new action
-        self.openAction = QAction(QIcon('open.png'), 'Open &File', self)        
-        self.openAction.setShortcut('Ctrl+O')
-        self.openAction.setStatusTip('Open movie')
-        self.openAction.triggered.connect(self.openFile)
+        # Create open file action
+        self.openFileAction = QAction(QIcon('open.png'), 'Open &File', self)        
+        self.openFileAction.setShortcut('Ctrl+O')
+        self.openFileAction.setStatusTip('Open movie')
+        self.openFileAction.triggered.connect(self.openFile)
 
-        # Create exit action
-        self.exitAction = QAction(QIcon('exit.png'), '&Exit', self)        
-        self.exitAction.setShortcut('Ctrl+Q')
-        self.exitAction.setStatusTip('Exit application')
-        self.exitAction.triggered.connect(self.exitCall)
+        # Create quit app action
+        self.quitAction = QAction(QIcon('exit.png'), '&Quit', self)        
+        self.quitAction.setShortcut('Ctrl+Q')
+        self.quitAction.setStatusTip('Exit application')
+        self.quitAction.triggered.connect(self.exitCall)
 
-        # Create exit action // To do on the bus
+        # Create open multiple files action // To do on the bus
         self.openMultipleAction = QAction(QIcon('open.png'), 'Open Multiple Files', self)        
         self.openMultipleAction.setShortcut('Ctrl+Q')
         self.openMultipleAction.setStatusTip('Open Multiple Files')
         self.openMultipleAction.triggered.connect(self.openMultipleFiles)
 
-        # Create exit action // To do on the bus
+        # Create open directory action // To do on the bus
         self.openDirectoryAction = QAction(QIcon('open.png'), 'Open Directory', self)        
         self.openDirectoryAction.setShortcut('Ctrl+Q')
         self.openDirectoryAction.setStatusTip('Open Directory')
         self.openDirectoryAction.triggered.connect(self.openDirectory)
 
-        # Create exit action // To do on the bus
+        # Create open disc action // To do on the bus
         self.openDiscAction = QAction(QIcon('open.png'), 'Open Disc', self)        
         self.openDiscAction.setShortcut('Ctrl+Q')
         self.openDiscAction.setStatusTip('Open Disc')
         self.openDiscAction.triggered.connect(self.openDisc)
 
-        # Create exit action // To do on the bus
+        # Create open network stream action // To do on the bus
         self.openNetworkStreamAction = QAction(QIcon('open.png'), 'Open Network Stream', self)        
         self.openNetworkStreamAction.setShortcut('Ctrl+Q')
         self.openNetworkStreamAction.setStatusTip('Open Network Stream')
         self.openNetworkStreamAction.triggered.connect(self.openNetworkStream)
 
         # Create exit action // To do on the bus
-        self.openCaptureAction = QAction(QIcon('open.png'), 'Open Capture Device', self)        
-        self.openCaptureAction.setShortcut('Ctrl+Q')
-        self.openCaptureAction.setStatusTip('Open Capture')
-        self.openCaptureAction.triggered.connect(self.openCapture)
+        self.openCaptureDeviceAction = QAction(QIcon('open.png'), 'Open Capture Device', self)        
+        self.openCaptureDeviceAction.setShortcut('Ctrl+Q')
+        self.openCaptureDeviceAction.setStatusTip('Open Capture Device')
+        self.openCaptureDeviceAction.triggered.connect(self.openCaptureDevice)
 
         # Create exit action // To do on the bus
         self.openLocationFromClipboardAction = QAction(QIcon('open.png'), 'Open Location From Clipboard', self)        
@@ -105,9 +105,14 @@ class VideoWidget(QMainWindow):
 
         # Create Media menu on the menubar and add action
         self.mediaMenu = self.menuBar.addMenu('&Media')
-        self.mediaMenu.addAction(self.openAction)
-        self.mediaMenu.addAction(self.exitAction)
-
+        self.mediaMenu.addAction(self.openFileAction)
+        self.mediaMenu.addAction(self.quitAction)
+        self.mediaMenu.addAction(self.openMultipleAction)
+        self.mediaMenu.addAction(self.openDirectoryAction)
+        self.mediaMenu.addAction(self.openDiscAction)
+        self.mediaMenu.addAction(self.openNetworkStreamAction)
+        self.mediaMenu.addAction(self.openCaptureDeviceAction)
+        self.mediaMenu.addAction(self.openRecentMediaAction)
 
         # Create playback menu on the menubar and add action
         self.playbackMenu = self.menuBar.addMenu('&Playback')
@@ -203,7 +208,7 @@ class VideoWidget(QMainWindow):
         pass
 
     # To do on the bus
-    def openCapture(self):
+    def openCaptureDevice(self):
         pass
 
     # To do on the bus
