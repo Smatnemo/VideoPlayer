@@ -59,16 +59,22 @@ class VideoWidget(QMainWindow):
         self.exitAction.triggered.connect(self.exitCall)
 
         # Create exit action // To do on the bus
-        self.openMultipleAction = QAction(QIcon('open.png'), '&Exit', self)        
+        self.openMultipleAction = QAction(QIcon('open.png'), 'Open Multiple Files', self)        
         self.openMultipleAction.setShortcut('Ctrl+Q')
-        self.openMultipleAction.setStatusTip('Exit application')
+        self.openMultipleAction.setStatusTip('Open Multiple Files')
         self.openMultipleAction.triggered.connect(self.openMultipleFiles)
 
         # Create exit action // To do on the bus
-        self.openDirectoryAction = QAction(QIcon('open.png'), '&Exit', self)        
+        self.openDirectoryAction = QAction(QIcon('open.png'), 'Open Directory', self)        
         self.openDirectoryAction.setShortcut('Ctrl+Q')
-        self.openDirectoryAction.setStatusTip('Exit application')
+        self.openDirectoryAction.setStatusTip('Open Directory')
         self.openDirectoryAction.triggered.connect(self.openDirectory)
+
+        # Create exit action // To do on the bus
+        self.openNetworkStreamAction = QAction(QIcon('open.png'), 'Open Network Stream', self)        
+        self.openNetworkStreamAction.setShortcut('Ctrl+Q')
+        self.openNetworkStreamAction.setStatusTip('Open Network Stream')
+        self.openNetworkStreamAction.triggered.connect(self.openNetworkStream)
 
         # Create menu bar and add action
         self.menuBar = self.menuBar()
@@ -166,6 +172,10 @@ class VideoWidget(QMainWindow):
 
     # To do on the bus
     def openDirectory(self):
+        pass
+
+    # To do on the bus
+    def openNetworkStream(self):
         pass
 
     def play(self):
