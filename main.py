@@ -47,7 +47,7 @@ class VideoWidget(QMainWindow):
         self.errorLabel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
 
         # Create new action
-        self.openAction = QAction(QIcon('open.png'), '&Open', self)        
+        self.openAction = QAction(QIcon('open.png'), 'Open &File', self)        
         self.openAction.setShortcut('Ctrl+O')
         self.openAction.setStatusTip('Open movie')
         self.openAction.triggered.connect(self.openFile)
@@ -57,6 +57,18 @@ class VideoWidget(QMainWindow):
         self.exitAction.setShortcut('Ctrl+Q')
         self.exitAction.setStatusTip('Exit application')
         self.exitAction.triggered.connect(self.exitCall)
+
+        # Create exit action // To do on the bus
+        self.openMultipleAction = QAction(QIcon('open.png'), '&Exit', self)        
+        self.openMultipleAction.setShortcut('Ctrl+Q')
+        self.openMultipleAction.setStatusTip('Exit application')
+        self.openMultipleAction.triggered.connect(self.openMultipleFiles)
+
+        # Create exit action // To do on the bus
+        self.openDirectoryAction = QAction(QIcon('open.png'), '&Exit', self)        
+        self.openDirectoryAction.setShortcut('Ctrl+Q')
+        self.openDirectoryAction.setStatusTip('Exit application')
+        self.openDirectoryAction.triggered.connect(self.openDirectory)
 
         # Create menu bar and add action
         self.menuBar = self.menuBar()
@@ -147,6 +159,14 @@ class VideoWidget(QMainWindow):
             self.stopButton.setEnabled(True)
             self.forward.setEnabled(True)
             self.backward.setEnabled(True)
+
+    # To do on the bus
+    def openMultipleFiles(self):
+        pass
+
+    # To do on the bus
+    def openDirectory(self):
+        pass
 
     def play(self):
         if self.mediaPlayer.state() == QMediaPlayer.PlayingState:
