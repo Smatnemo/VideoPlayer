@@ -71,10 +71,34 @@ class VideoWidget(QMainWindow):
         self.openDirectoryAction.triggered.connect(self.openDirectory)
 
         # Create exit action // To do on the bus
+        self.openDiscAction = QAction(QIcon('open.png'), 'Open Disc', self)        
+        self.openDiscAction.setShortcut('Ctrl+Q')
+        self.openDiscAction.setStatusTip('Open Disc')
+        self.openDiscAction.triggered.connect(self.openDisc)
+
+        # Create exit action // To do on the bus
         self.openNetworkStreamAction = QAction(QIcon('open.png'), 'Open Network Stream', self)        
         self.openNetworkStreamAction.setShortcut('Ctrl+Q')
         self.openNetworkStreamAction.setStatusTip('Open Network Stream')
         self.openNetworkStreamAction.triggered.connect(self.openNetworkStream)
+
+        # Create exit action // To do on the bus
+        self.openCaptureAction = QAction(QIcon('open.png'), 'Open Capture Device', self)        
+        self.openCaptureAction.setShortcut('Ctrl+Q')
+        self.openCaptureAction.setStatusTip('Open Capture')
+        self.openCaptureAction.triggered.connect(self.openCapture)
+
+        # Create exit action // To do on the bus
+        self.openLocationFromClipboardAction = QAction(QIcon('open.png'), 'Open Location From Clipboard', self)        
+        self.openLocationFromClipboardAction.setShortcut('Ctrl+Q')
+        self.openLocationFromClipboardAction.setStatusTip('Open Location From Clipboard')
+        self.openLocationFromClipboardAction.triggered.connect(self.openLocationFromClipboard)
+
+        # Create exit action // To do on the bus
+        self.openRecentMediaAction = QAction(QIcon('open.png'), 'Open Recent Media', self)        
+        self.openRecentMediaAction.setShortcut('Ctrl+Q')
+        self.openRecentMediaAction.setStatusTip('Open Recent Media')
+        self.openRecentMediaAction.triggered.connect(self.openRecentMedia)
 
         # Create menu bar and add action
         self.menuBar = self.menuBar()
@@ -177,6 +201,21 @@ class VideoWidget(QMainWindow):
     # To do on the bus
     def openNetworkStream(self):
         pass
+
+    # To do on the bus
+    def openCapture(self):
+        pass
+
+    # To do on the bus
+    def openLocationFromClipboard(self):
+        pass
+
+    # To do on the bus
+    def openRecentMedia(self):
+        pass
+
+    def openDisc(self):
+        pass 
 
     def play(self):
         if self.mediaPlayer.state() == QMediaPlayer.PlayingState:
