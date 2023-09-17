@@ -66,14 +66,24 @@ class VideoWidget(QMainWindow):
         self.mediaMenu.addAction(self.openAction)
         self.mediaMenu.addAction(self.exitAction)
 
-        # Create tools menu on the menubar and add action
-        self.toolsMenu = self.menuBar.addMenu('Too&ls')
 
         # Create playback menu on the menubar and add action
         self.playbackMenu = self.menuBar.addMenu('&Playback')
 
         # Create audio menu on the menubar and add action
         self.audioMenu = self.menuBar.addMenu('&Audio')
+
+        # Create video menu on the menubar and add action
+        self.videoMenu = self.menuBar.addMenu('&Video')
+
+        # Create video menu on the menubar and add action
+        self.subtitleMenu = self.menuBar.addMenu('Subti&tle')
+
+        # Create tools menu on the menubar and add action
+        self.toolsMenu = self.menuBar.addMenu('Too&ls')
+
+        # Create view menu on the menubar and add action
+        self.viewMenu = self.menuBar.addMenu('V&iew')
 
         # Create Help menu on the menubar and add action
         self.helpMenu = self.menuBar.addMenu('&Help')
