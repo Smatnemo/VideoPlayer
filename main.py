@@ -19,7 +19,6 @@ class VideoWidget(QMainWindow):
         self.setWindowTitle("Video Player")
         self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
 
-
         self.video_widget = QVideoWidget()
         
         self.forward = QPushButton()
@@ -29,7 +28,6 @@ class VideoWidget(QMainWindow):
         self.backward = QPushButton()
         self.backward.setEnabled(False)
         self.backward.setIcon(self.style().standardIcon(QStyle.SP_MediaSeekBackward))
-
 
         self.stopButton = QPushButton()
         self.stopButton.setEnabled(False)
@@ -61,10 +59,24 @@ class VideoWidget(QMainWindow):
         self.exitAction.triggered.connect(self.exitCall)
 
         # Create menu bar and add action
-        menuBar = self.menuBar()
-        fileMenu = menuBar.addMenu('&File')
-        fileMenu.addAction(self.openAction)
-        fileMenu.addAction(self.exitAction)
+        self.menuBar = self.menuBar()
+
+        # Create Media menu on the menubar and add action
+        self.mediaMenu = self.menuBar.addMenu('&Media')
+        self.mediaMenu.addAction(self.openAction)
+        self.mediaMenu.addAction(self.exitAction)
+
+        # Create tools menu on the menubar and add action
+        self.toolsMenu = self.menuBar.addMenu('Too&ls')
+
+        # Create playback menu on the menubar and add action
+        self.playbackMenu = self.menuBar.addMenu('&Playback')
+
+        # Create audio menu on the menubar and add action
+        self.audioMenu = self.menuBar.addMenu('&Audio')
+
+        # Create Help menu on the menubar and add action
+        self.helpMenu = self.menuBar.addMenu('&Help')
 
         # Create layouts to place inside widget
         self.controlLayout = QHBoxLayout()
@@ -79,7 +91,11 @@ class VideoWidget(QMainWindow):
 
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.video_widget)
-        self.layout.addLayout(self.controlLayout)
+
+        self.controlwidget = QWidget()
+        self.controlwidget.setLayout(self.controlLayout)
+
+        self.layout.addWidget(self.controlwidget)
         self.layout.addWidget(self.errorLabel)
 
         # Set widget to contain window contents
@@ -180,6 +196,31 @@ class VideoWidget(QMainWindow):
 
     def backSlider10(self):
         self.mediaPlayer.setPosition(self.mediaPlayer.position() - 10000*60)
+
+# Create a full screen functionality. On double click, show full screen
+    def mouseDoubleClickEvent(self, event):
+        self.handleFullScreen()
+
+    def handleFullScreen(self):
+        self.menuBar.hide()
+        self.controlwidget.hide()
+        self.showFullScreen()
+
+    def hideSlider(self):
+        self.playButton.hide()
+        # self.position
+        pass 
+
+    def showSlider(self):
+        pass
+
+    def hideOrShowSlider(self):
+        if self.positionSlider.isVisible():
+            self.hideSlider()
+        else:
+            self.showSlider()
+
+    
 
 
 if __name__ == '__main__':
