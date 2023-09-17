@@ -47,7 +47,7 @@ class VideoWidget(QMainWindow):
         self.errorLabel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
 
         # Create open file action
-        self.openFileAction = QAction(QIcon('open.png'), 'Open &File', self)        
+        self.openFileAction = QAction(QIcon('open.jpeg'), 'Open &File', self)        
         self.openFileAction.setShortcut('Ctrl+O')
         self.openFileAction.setStatusTip('Open movie')
         self.openFileAction.triggered.connect(self.openFile)
