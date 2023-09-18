@@ -156,16 +156,27 @@ class VideoWidget(QMainWindow):
         self.controlLayout.addWidget(self.playButton)
         self.controlLayout.addWidget(self.stopButton)
         self.controlLayout.addWidget(self.forward)
-        self.controlLayout.addWidget(self.positionSlider)
+        # self.controlLayout.addWidget(self.positionSlider)
+
+        # Create two horizontal widgets in the control widget
+        self.timeAndSlider = QHBoxLayout()
+        self.timeAndSlider.addWidget(self.positionSlider)
         
+        # Central widget that is the focus of this app
         self.centralWidget = QWidget()
 
+        # Create layout for the central widget
         self.layout = QVBoxLayout()
-        self.layout.addWidget(self.video_widget)
+        
+        self.lowerLayout = QVBoxLayout()
+        self.lowerLayout.addLayout(self.timeAndSlider)
+        self.lowerLayout.addLayout(self.controlLayout)
 
+        
         self.controlwidget = QWidget()
-        self.controlwidget.setLayout(self.controlLayout)
+        self.controlwidget.setLayout(self.lowerLayout)
 
+        self.layout.addWidget(self.video_widget)
         self.layout.addWidget(self.controlwidget)
         self.layout.addWidget(self.errorLabel)
 
