@@ -99,6 +99,11 @@ class VideoWidget(QMainWindow):
         self.openRecentMediaAction.setStatusTip('Open Recent Media')
         self.openRecentMediaAction.hovered.connect(self.openRecentMedia)
 
+        # create action to save playlist to file
+        self.savePlaylistToFileAction = QAction(QIcon('save.jpeg'), 'Save Playlist to File', self)
+        self.savePlaylistToFileAction.setShortcut('Ctrl+Y')
+        self.savePlaylistToFileAction.triggered.connect(self.savePlaylistToFile)
+
         # Create menu bar and add action
         self.menuBar = self.menuBar()
 
@@ -110,8 +115,11 @@ class VideoWidget(QMainWindow):
                                    self.openNetworkStreamAction,
                                    self.openCaptureDeviceAction,
                                    self.openLocationFromClipboardAction,
-                                   self.openRecentMediaAction,
-                                   self.quitAction])
+                                   self.openRecentMediaAction])
+        self.mediaMenu.addSeparator()
+        self.mediaMenu.addAction(self.savePlaylistToFileAction)
+        self.mediaMenu.addSeparator()
+        self.mediaMenu.addAction(self.quitAction)
         
 
         # Create playback menu on the menubar and add action
@@ -183,6 +191,9 @@ class VideoWidget(QMainWindow):
         self.mediaPlayer.positionChanged.connect(self.positionChanged)
         self.mediaPlayer.durationChanged.connect(self.durationChanged)
         self.mediaPlayer.error.connect(self.handleError)
+
+        # Create an empty list to hold a list of recently viewed media. Each item in the list should be clickable
+        self.recent_list = []
  
     def openFile(self):
         fileName, _ = QFileDialog.getOpenFileName(self, "Open Movie",
@@ -194,6 +205,10 @@ class VideoWidget(QMainWindow):
             self.stopButton.setEnabled(True)
             self.forward.setEnabled(True)
             self.backward.setEnabled(True)
+    
+    # To do at work
+    def savePlaylistToFile(self):
+        pass
 
     # To do on the bus
     def openMultipleFiles(self):
@@ -217,9 +232,11 @@ class VideoWidget(QMainWindow):
 
     # To do on the bus
     def openRecentMedia(self):
-        print("This is me")
-
-
+        # Add the list to a custom drop down menu
+        menu = QMenu()
+        # Add the recent_list to the menu
+        menu.addActions(self.recent_list)
+        
     def openDisc(self):
         pass 
 
