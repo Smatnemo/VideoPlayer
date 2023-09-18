@@ -104,6 +104,11 @@ class VideoWidget(QMainWindow):
         self.savePlaylistToFileAction.setShortcut('Ctrl+Y')
         self.savePlaylistToFileAction.triggered.connect(self.savePlaylistToFile)
 
+        # Create action to convert / save
+        self.convertOrSaveAction = QAction(QIcon(), 'Conve&rt / Save...', self)
+        self.convertOrSaveAction.setShortcut('Ctrl+R')
+        self.convertOrSaveAction.triggered.connect(self.convertOrSave)
+
         # Create menu bar and add action
         self.menuBar = self.menuBar()
 
@@ -118,6 +123,7 @@ class VideoWidget(QMainWindow):
                                    self.openRecentMediaAction])
         self.mediaMenu.addSeparator()
         self.mediaMenu.addAction(self.savePlaylistToFileAction)
+        self.mediaMenu.addAction(self.convertOrSaveAction)
         self.mediaMenu.addSeparator()
         self.mediaMenu.addAction(self.quitAction)
         
@@ -239,6 +245,9 @@ class VideoWidget(QMainWindow):
         
     def openDisc(self):
         pass 
+
+    def convertOrSave(self):
+        pass
 
     def play(self):
         if self.mediaPlayer.state() == QMediaPlayer.PlayingState:
