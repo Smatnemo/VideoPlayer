@@ -1,16 +1,16 @@
-VideoPlayer
+# VideoPlayer
 
 
 ## Table of contents
 
-- Requirements		
+### Requirements		
 	- This module depends on the following module:						python -m venv videoPlayerVenv
 		source videoPlayerVenv/bin/activate
 		pip install -r requirements.txt
-- Installation
+### Installation
 	git clone git@github.com:Smatnemo/VideoPlayer.git
 	cd VideoPlayer
 	python main.py 
 		
-- Maintainers
+### Maintainers
 	Tertese Samuel Moses
