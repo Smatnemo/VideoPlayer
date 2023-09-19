@@ -47,60 +47,60 @@ class VideoWidget(QMainWindow):
         self.errorLabel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
 
         # Create open file action
-        self.openFileAction = QAction(QIcon('open.jpeg'), 'Open &File', self)        
+        self.openFileAction = QAction(QIcon('images/open.jpeg'), 'Open &File', self)        
         self.openFileAction.setShortcut('Ctrl+O')
         self.openFileAction.setStatusTip('Open movie')
         self.openFileAction.triggered.connect(self.openFile)
 
         # Create quit app action
-        self.quitAction = QAction(QIcon('exit.png'), '&Quit', self)        
+        self.quitAction = QAction(QIcon('images/exit.png'), '&Quit', self)        
         self.quitAction.setShortcut('Ctrl+Q')
         self.quitAction.setStatusTip('Exit application')
         self.quitAction.triggered.connect(self.exitCall)
 
         # Create open multiple files action
-        self.openMultipleAction = QAction(QIcon('open.jpeg'), 'Open Multiple Files', self)        
+        self.openMultipleAction = QAction(QIcon('images/open.jpeg'), 'Open Multiple Files', self)        
         self.openMultipleAction.setShortcut('Ctrl+Shift+O')
         self.openMultipleAction.setStatusTip('Open Multiple Files')
         self.openMultipleAction.triggered.connect(self.openMultipleFiles)
 
         # Create open directory action
-        self.openDirectoryAction = QAction(QIcon('directory.jpeg'), 'Open Directory', self)        
+        self.openDirectoryAction = QAction(QIcon('images/directory.jpeg'), 'Open Directory', self)        
         self.openDirectoryAction.setShortcut('Ctrl+F')
         self.openDirectoryAction.setStatusTip('Open Directory')
         self.openDirectoryAction.triggered.connect(self.openDirectory)
 
         # Create open disc action
-        self.openDiscAction = QAction(QIcon('disc.png'), 'Open Disc', self)        
+        self.openDiscAction = QAction(QIcon('images/disc.png'), 'Open Disc', self)        
         self.openDiscAction.setShortcut('Ctrl+D')
         self.openDiscAction.setStatusTip('Open Disc')
         self.openDiscAction.triggered.connect(self.openDisc)
 
         # Create open network stream action
-        self.openNetworkStreamAction = QAction(QIcon('network.png'), 'Open Network Stream', self)        
+        self.openNetworkStreamAction = QAction(QIcon('images/network.png'), 'Open Network Stream', self)        
         self.openNetworkStreamAction.setShortcut('Ctrl+N')
         self.openNetworkStreamAction.setStatusTip('Open Network Stream')
         self.openNetworkStreamAction.triggered.connect(self.openNetworkStream)
 
         # Create open capture device action
-        self.openCaptureDeviceAction = QAction(QIcon('device.png'), 'Open Capture Device', self)        
+        self.openCaptureDeviceAction = QAction(QIcon('images/device.png'), 'Open Capture Device', self)        
         self.openCaptureDeviceAction.setShortcut('Ctrl+C')
         self.openCaptureDeviceAction.setStatusTip('Open Capture Device')
         self.openCaptureDeviceAction.triggered.connect(self.openCaptureDevice)
 
         # Create open location from clipboard action 
-        self.openLocationFromClipboardAction = QAction(QIcon('clipboard.png'), 'Open Location From Clipboard', self)        
+        self.openLocationFromClipboardAction = QAction(QIcon('images/clipboard.png'), 'Open Location From Clipboard', self)        
         self.openLocationFromClipboardAction.setShortcut('Ctrl+V')
         self.openLocationFromClipboardAction.setStatusTip('Open Location From Clipboard')
         self.openLocationFromClipboardAction.triggered.connect(self.openLocationFromClipboard)
 
         # Create open recent media action // Add BLACK RIGHT-POINTING TRIANGLE U+25C0
-        self.openRecentMediaAction = QAction(QIcon('open.jpeg'), 'Open Recent Media', self)        
+        self.openRecentMediaAction = QAction(QIcon('images/open.jpeg'), 'Open Recent Media', self)        
         self.openRecentMediaAction.setStatusTip('Open Recent Media')
         self.openRecentMediaAction.hovered.connect(self.openRecentMedia)
 
         # create action to save playlist to file
-        self.savePlaylistToFileAction = QAction(QIcon('save.jpeg'), 'Save Playlist to File', self)
+        self.savePlaylistToFileAction = QAction(QIcon('images/save.jpeg'), 'Save Playlist to File', self)
         self.savePlaylistToFileAction.setShortcut('Ctrl+Y')
         self.savePlaylistToFileAction.triggered.connect(self.savePlaylistToFile)
 
