@@ -127,27 +127,162 @@ class VideoWidget(QMainWindow):
         self.mediaMenu.addSeparator()
         self.mediaMenu.addAction(self.quitAction)
         
+        # Create actions for the playback menu
+        self.titleAction = QAction(QIcon(), 'T&itle', self)
+        self.chapterAction = QAction(QIcon(), 'Chapter', self)
+        self.programAction = QAction(QIcon(), 'Program', self)
+        self.customBackgroundsAction = QAction(QIcon(), 'Custom Backgrounds', self)
+        self.rendererAction = QAction(QIcon(), 'Renderer', self)
+        self.speedAction = QAction(QIcon(), 'Speed', self)
+        self.jumpForwardAction = QAction(QIcon(), '&Jump Forward', self)
+        self.jumpBackwardAction = QAction(QIcon(), 'Jump Bac&kward', self)
+        self.jumpToSpecificTimeAction = QAction(QIcon(), 'Jump To Specific &Time', self)
+        self.jumpToSpecificTimeAction.setShortcut('Ctrl+T')
+        self.playAction = QAction(QIcon(), '&Play', self)
+        self.stopAction = QAction(QIcon(), '&Stop', self)
+        self.previousAction = QAction(QIcon(), 'Pre&vious', self)
+        self.nextAction = QAction(QIcon(), 'Ne&xt', self)
+        self.recordAction = QAction(QIcon(), 'Record', self)
 
         # Create playback menu on the menubar and add action
         self.playbackMenu = self.menuBar.addMenu('&Playback')
+        self.playbackMenu.addActions([self.titleAction, 
+                                      self.chapterAction, 
+                                      self.programAction, 
+                                      self.customBackgroundsAction])
+        self.playbackMenu.addSeparator()
+        self.playbackMenu.addAction(self.rendererAction)
+        self.playbackMenu.addSeparator()
+        self.playbackMenu.addAction(self.speedAction)
+        self.playbackMenu.addSeparator()
+        self.playbackMenu.addActions([self.jumpForwardAction, 
+                                      self.jumpBackwardAction, 
+                                      self.jumpToSpecificTimeAction])
+        self.playbackMenu.addSeparator()
+        self.playbackMenu.addActions([self.playAction, 
+                                      self.stopAction, 
+                                      self.previousAction, 
+                                      self.nextAction, 
+                                      self.recordAction])
 
+
+        # Create actions for the audio menu
+        self.audioTrackAction = QAction(QIcon(), 'Audio Track', self)
+        self.audioDeviceAction = QAction(QIcon(), 'Audio Device', self)
+        self.stereoModeAction = QAction(QIcon(), 'Stereo Mode', self)
+        self.visualizationsAction = QAction(QIcon(), 'Visualizations', self)
+        self.increaseVolumeAction = QAction(QIcon(), '&Increase Volume', self)
+        self.decreaseVolumeAction = QAction(QIcon(), 'D&ecrease Volume', self)
+        self.muteAction = QAction(QIcon(), '&Mute', self)
         # Create audio menu on the menubar and add action
         self.audioMenu = self.menuBar.addMenu('&Audio')
+        self.audioMenu.addActions([self.audioTrackAction, 
+                                   self.audioDeviceAction,
+                                   self.stereoModeAction])
+        self.audioMenu.addSeparator()
+        self.audioMenu.addAction(self.visualizationsAction)
+        self.audioMenu.addSeparator()
+        self.audioMenu.addActions([self.increaseVolumeAction,
+                                   self.decreaseVolumeAction,
+                                   self.muteAction])
 
+        # Create actions to be added to the video menu
+        self.videoTrackAction = QAction(QIcon(), 'Video &Track', self)
+        self.fullscreenAction = QAction(QIcon(), '&Fullscreen', self, checkable=True)
+        self.alwaysFitWindowAction = QAction(QIcon(), 'Always Fit &Window', self, checkable=True)
+        self.setAsWallPaperAction = QAction(QIcon(), 'Set as Wall&paper', self, checkable=True)
+        self.zoomAction = QAction(QIcon(), '&Zoom', self)
+        self.aspectRatioAction = QAction(QIcon(), '&Aspect Ratio', self)
+        self.cropAction = QAction(QIcon(), '&Crop', self)
+        self.deinterlaceAction = QAction(QIcon(), '&Deinterlace', self)
+        self.deinterlaceModeAction = QAction(QIcon(), '&Deinterlace mode', self)
+        self.takeSnapshotAction = QAction(QIcon(), 'Take &Snapshot', self)
         # Create video menu on the menubar and add action
         self.videoMenu = self.menuBar.addMenu('&Video')
+        self.videoMenu.addAction(self.videoTrackAction)
+        self.videoMenu.addSeparator()
+        self.videoMenu.addActions([self.fullscreenAction,
+                                   self.alwaysFitWindowAction,
+                                   self.setAsWallPaperAction])
+        self.videoMenu.addSeparator()
+        self.videoMenu.addActions([self.zoomAction,
+                                   self.aspectRatioAction,
+                                   self.cropAction])
+        self.videoMenu.addSeparator()
+        self.videoMenu.addActions([self.deinterlaceAction,
+                                   self.deinterlaceModeAction])
+        self.videoMenu.addSeparator()
+        self.videoMenu.addAction(self.takeSnapshotAction)
 
-        # Create video menu on the menubar and add action
+        # Create actions to be added to subtitle menu
+        self.addSubtitleFileAction = QAction(QIcon(), 'Add Subtitle File..', self)
+        self.subTrackAction = QAction(QIcon(), 'Sub Track', self)
+        # Create subtitle menu on the menubar and add action
         self.subtitleMenu = self.menuBar.addMenu('Subti&tle')
+        self.subtitleMenu.addActions([self.addSubtitleFileAction, 
+                                      self.subTrackAction])
 
+        # Create actions to add to tools menu
+        self.effectsAndFiltersAction = QAction(QIcon(), 'Effects and Filters', self)
+        self.effectsAndFiltersAction.setShortcut('Ctrl+E')
+        self.trackSynchronizationAction = QAction(QIcon(), 'Track Synchronization', self)
+        self.mediaInformationAction = QAction(QIcon('images/info.png'), 'Media Information', self)
+        self.codecInformationAction = QAction(QIcon('images/info.png'), '&Codec Information', self)
+        self.vlmConfigurationAction = QAction(QIcon(), '&VLM Configuration', self)
+        self.programGuideAction = QAction(QIcon(), 'Program Guide', self)
+        self.messagesAction = QAction(QIcon(), 'Messages', self)
+        self.pluginsAndExtensionsAction = QAction(QIcon(), 'Plugins and extensions', self)
+        self.customizeInterfaceAction = QAction(QIcon(), 'Customize Interface..', self)
+        self.preferencesAction = QAction(QIcon(), 'Preferences', self)
         # Create tools menu on the menubar and add action
-        self.toolsMenu = self.menuBar.addMenu('Too&ls')
+        self.toolsMenu = self.menuBar.addMenu('Tool&s')
+        self.toolsMenu.addActions([self.effectsAndFiltersAction,
+                                   self.trackSynchronizationAction,
+                                   self.mediaInformationAction,
+                                   self.codecInformationAction,
+                                   self.vlmConfigurationAction,
+                                   self.programGuideAction,
+                                   self.messagesAction,
+                                   self.pluginsAndExtensionsAction])
+        self.toolsMenu.addSeparator()
+        self.toolsMenu.addActions([self.customizeInterfaceAction,
+                                   self.preferencesAction])
 
+        # Create actions to be added to the view menu
+        self.playlistAction = QAction(QIcon(), 'Play&list', self)
+        self.dockedPlaylistAction = QAction(QIcon(), 'Docked Playlist', self, checkable=True)
+        self.alwaysOnTopAction = QAction(QIcon(), 'Always on &Top', self, checkable=True)
+        self.minimalInterfaceAction = QAction(QIcon(), 'Mi&nimal Interface', self, checkable=True)
+        self.fullscreenInterfaceAction = QAction(QIcon(), '&Fullscreen Interface', self, checkable=True)
+        self.advancedControlsAction = QAction(QIcon(), '&Advanced Controls', self, checkable=True)
+        self.statusBarAction = QAction(QIcon(), 'Status Bar', self, checkable=True)
+        self.addInterfaceAction = QAction(QIcon(), 'Add Interface', self)
+        self.VLsubAction = QAction(QIcon(), 'VLsub', self, checkable=True)
         # Create view menu on the menubar and add action
         self.viewMenu = self.menuBar.addMenu('V&iew')
+        self.viewMenu.addActions([self.playlistAction,
+                                  self.dockedPlaylistAction])
+        self.viewMenu.addSeparator()
+        self.viewMenu.addAction(self.alwaysOnTopAction)
+        self.viewMenu.addSeparator()
+        self.viewMenu.addActions([self.minimalInterfaceAction,
+                                  self.fullscreenInterfaceAction,
+                                  self.advancedControlsAction,
+                                  self.statusBarAction])
+        self.viewMenu.addSeparator()
+        self.viewMenu.addAction(self.addInterfaceAction)
+        self.viewMenu.addSeparator()
+        self.viewMenu.addAction(self.VLsubAction)
 
+        # Create actions to be added to Help menu
+        self.helpAction = QAction(QIcon('images/help.png'), '&Help', self)
+        self.helpAction.setShortcut('F1')
+        self.aboutAction = QAction(QIcon('images/info.png'), '&About', self)
+        self.aboutAction.setShortcut('Shift+F1')
         # Create Help menu on the menubar and add action
         self.helpMenu = self.menuBar.addMenu('&Help')
+        self.helpMenu.addActions([self.helpAction, 
+                                  self.aboutAction])
 
         # Create layouts to place inside widget
         self.controlLayout = QHBoxLayout()
