@@ -138,11 +138,20 @@ class VideoWidget(QMainWindow):
         self.jumpBackwardAction = QAction(QIcon(), 'Jump Bac&kward', self)
         self.jumpToSpecificTimeAction = QAction(QIcon(), 'Jump To Specific &Time', self)
         self.jumpToSpecificTimeAction.setShortcut('Ctrl+T')
-        self.playAction = QAction(QIcon(), '&Play', self)
-        self.stopAction = QAction(QIcon(), '&Stop', self)
-        self.previousAction = QAction(QIcon(), 'Pre&vious', self)
-        self.nextAction = QAction(QIcon(), 'Ne&xt', self)
-        self.recordAction = QAction(QIcon(), 'Record', self)
+        self.playAction = QAction(QIcon(self.style().standardIcon(QStyle.SP_MediaPlay)), '&Play', self)
+        self.playAction.setEnabled(False)
+        self.playAction.triggered.connect(self.play)
+        self.stopAction = QAction(QIcon(self.style().standardIcon(QStyle.SP_MediaStop)), '&Stop', self)
+        self.stopAction.setEnabled(False)
+        self.stopAction.triggered.connect(self.stopMedia)
+        self.previousAction = QAction(QIcon(self.style().standardIcon(QStyle.SP_MediaSeekBackward)), 'Pre&vious', self)
+        self.previousAction.setEnabled(False)
+        self.previousAction.triggered.connect(self.backSlider)
+        self.nextAction = QAction(QIcon(self.style().standardIcon(QStyle.SP_MediaSeekForward)), 'Ne&xt', self)
+        self.nextAction.setEnabled(False)
+        self.nextAction.triggered.connect(self.forwardSlider)
+        self.recordAction = QAction(QIcon('images/recordIcon.png'), 'Record', self)
+        self.recordAction.setEnabled(False)
 
         # Create playback menu on the menubar and add action
         self.playbackMenu = self.menuBar.addMenu('&Playback')
@@ -213,6 +222,7 @@ class VideoWidget(QMainWindow):
                                    self.deinterlaceModeAction])
         self.videoMenu.addSeparator()
         self.videoMenu.addAction(self.takeSnapshotAction)
+
 
         # Create actions to be added to subtitle menu
         self.addSubtitleFileAction = QAction(QIcon(), 'Add Subtitle File..', self)
@@ -344,6 +354,7 @@ class VideoWidget(QMainWindow):
         self.mediaPlayer.durationChanged.connect(self.durationChanged)
         self.mediaPlayer.error.connect(self.handleError)
 
+        
         # Create an empty list to hold a list of recently viewed media. Each item in the list should be clickable
         self.recent_list = []
  
@@ -357,6 +368,12 @@ class VideoWidget(QMainWindow):
             self.stopButton.setEnabled(True)
             self.forward.setEnabled(True)
             self.backward.setEnabled(True)
+
+            self.playAction.setEnabled(True)
+            self.stopAction.setEnabled(True)
+            self.recordAction.setEnabled(True)
+            self.previousAction.setEnabled(True)
+            self.nextAction.setEnabled(True)
     
     # To do at work
     def savePlaylistToFile(self):
@@ -458,10 +475,24 @@ class VideoWidget(QMainWindow):
     def mouseDoubleClickEvent(self, event):
         self.handleFullScreen()
 
-    def handleFullScreen(self):
-        self.menuBar.hide()
-        self.controlwidget.hide()
-        self.showFullScreen()
+    def mousePressEvent(self, event):
+        if event == Qt.RightButton:
+            self.contextMenuEvent(event)
+    
+    def mouseClickEvent(self, event):
+        pass
+
+    def handleFullScreen(self):  
+        if QtCore.Qt.WindowFullScreen:
+            # self.windowState()
+            self.showNormal()
+        else:
+            self.menuBar.hide()
+            self.controlwidget.hide()
+            self.showFullScreen()
+
+    def hideFullScreen(self):
+        pass 
 
     def hideSlider(self):
         self.playButton.hide()
@@ -477,6 +508,31 @@ class VideoWidget(QMainWindow):
         else:
             self.showSlider()
 
+    
+        
+    def contextMenuEvent(self, event):
+        # Setting contextMenuPolicy
+        self.menu = QMenu(self.centralWidget)
+        # Populating the widget with actions
+        self.openMediaAction = QAction(QIcon(), 'Open Media', self)
+        self.toolsAction = QAction(QIcon(), 'Tool&s', self)
+        self.viewAction = QAction(QIcon(), 'V&iew', self)
+
+        self.menu.addAction(self.playAction)
+        self.menu.addAction(self.stopAction)
+        self.menu.addAction(self.previousAction)
+        self.menu.addAction(self.nextAction)
+        self.menu.addAction(self.recordAction)
+        self.menu.addSeparator()
+        self.menu.addAction(self.viewAction)
+        self.menu.addAction(self.toolsAction)
+        self.menu.addAction(self.playlistAction)
+        self.menu.addAction(self.openMediaAction)
+        self.menu.addSeparator()
+        self.menu.addAction(self.quitAction)
+
+        # Launching the menu 
+        self.menu.exec(event.globalPos())
     
 
 
