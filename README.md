@@ -4,8 +4,7 @@
 **VideoPlayer** is released under the GPLv3 license.
 
 ## Platforms
-**VideoPlayer** is to be made available mainly on debian distributions, particularly Ubuntu and Rasberry Pi OSes for learning how to use PyQt5
-Binary distribution of this player will be made available for Raspberry Pi OS.
+**VideoPlayer** currently only tested on Raspberry Pi OS.
 
 ### Requirements		
 #### Run the program in a virtual environment 
