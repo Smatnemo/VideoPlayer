@@ -14,6 +14,7 @@
 
 ### Installation
 	git clone git@github.com:Smatnemo/VideoPlayer.git
+### Run
 	cd VideoPlayer
 	python main.py 
 		
